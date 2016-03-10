@@ -29,7 +29,7 @@ MODE parameter specifies which algorithm is called by main.c:
 
 ##references
 
-\[1\] Louza, F. A., Gog, S., Telles, G. P., Optimal suffix sorting and LCP array construction for constant alphabets (submitted in 2016).
+\[1\] Louza, F. A., Gog, S., Telles, G. P., Optimal suffix sorting and LCP array construction for constant alphabets (submitted).
 
 \[2\] Nong, G., Practical linear-time O(1)-workspace suffix sorting for constant alphabets, ACM Trans. Inform. Syst., vol. 31, no. 3, pp. 1-15, 2013
 

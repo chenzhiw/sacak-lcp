@@ -1,6 +1,6 @@
 # ignore objects and archives, anywhere in the tree.
 *.[oa]
-saca-k+lcp
+sacak-lcp
 *.swp
 *.sa
 lib/utils_64.h
