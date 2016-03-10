@@ -1,0 +1,8 @@
+# ignore objects and archives, anywhere in the tree.
+*.[oa]
+saca-k+lcp
+*.swp
+*.sa
+lib/utils_64.h
+lib/utils_32.h
+tests/
