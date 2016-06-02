@@ -43,7 +43,7 @@ unsigned char* cat_char(unsigned char** R, int k, int_t *n){
 
 	if(*n>l){
 	  str = (unsigned char*) realloc(str, (l)*sizeof(unsigned char)); 
-	  printf("str_realloc(%" PRIdN ", %" PRIdN ")\n", *n, l);
+	  //printf("str_realloc(%" PRIdN ", %" PRIdN ")\n", *n, l);
 	}
 
 	*n = l;
