@@ -4,6 +4,8 @@ This code is an implementation of SACA-K+LCP [1], which extends the
 optimal suffix sorting algorithm SACA-K [2] to also compute the LCP array.
 
 
+Link: http://www.sciencedirect.com/science/article/pii/S0020019016301375
+
 --
 ##run:
 
@@ -29,7 +31,7 @@ MODE parameter specifies which algorithm is called by main.c:
 
 ##references
 
-\[1\] Louza, F. A., Gog, S., Telles, G. P., Optimal suffix sorting and LCP array construction for constant alphabets (submitted).
+\[1\] Louza, F. A., Gog, S., Telles, G. P., Optimal suffix sorting and LCP array construction for constant alphabets, Inf. Process. Lett. 118 (2017) 30–34.
 
 \[2\] Nong, G., Practical linear-time O(1)-workspace suffix sorting for constant alphabets, ACM Trans. Inform. Syst., vol. 31, no. 3, pp. 1-15, 2013
 

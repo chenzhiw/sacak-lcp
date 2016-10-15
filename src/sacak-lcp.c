@@ -12,7 +12,7 @@ const uint_t EMPTY_k=((uint_t)1)<<(sizeof(uint_t)*8-1);
 
 #define DEBUG 0 
 #define DEPTH 0
-#define TIME  1
+#define TIME  0
 #define RMQ   2  //variants = (1, trivial) (2, using Gog's stack)
 #define BINARY 0 //binary search on stack operations
 
