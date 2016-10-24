@@ -1121,6 +1121,9 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
   uint_t i;
   uint_t *bkt=NULL;
 
+  //avoid Use of uninitialised value (valgrind)
+  for(i=0;i<n;i++) SA[i]=LCP[i]=0;
+  
   #if TIME
     time_t t_time = 0; 
     clock_t c_time = 0; 
