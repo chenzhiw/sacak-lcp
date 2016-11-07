@@ -24,9 +24,9 @@ typedef struct _pair{
 } t_pair;
 
 int compare (const void * a, const void * b){
-  const uint_t *ia = (const uint_t *)a; 
-  const uint_t *ib = (const uint_t *)b;
-  return *ia  - *ib; 
+  if(*(const uint_t *)a < *(const uint_t *)b) return -1;
+  if(*(const uint_t *)a > *(const uint_t *)b) return 1;
+return 0;
 }
 
 int type_cmp(void *a, void *b){ return (*(uint_t*)a)-(*(uint_t*)b); }
@@ -280,7 +280,6 @@ void induceSAl0_LCP(uint_t *SA, int_t *LCP,
         int_t j;
         memcpy(tmp, last_occ, K*sizeof(uint_t));
 	qsort(tmp, K, sizeof(uint_t), compare);
-//      qsort2(tmp, K, sizeof(uint_t), type_cmp);
        
         int_t curr=1, end=1;
         STACK[top].idx=U_MAX;
@@ -468,10 +467,8 @@ void induceSAs0_LCP(uint_t *SA, int_t *LCP,
           int_t j;
           memcpy(tmp, last_occ, K*sizeof(uint_t));
 	  qsort(tmp, K, sizeof(uint_t), compare);
-//        qsort2(tmp, K, sizeof(uint_t), type_cmp);
 
-          int_t curr=0, end=1;
-          STACK[top].idx=U_MAX;
+          int_t curr=1, end=1;
 
           for(j=K-1;j>=0; j--){
 
@@ -488,12 +485,14 @@ void induceSAs0_LCP(uint_t *SA, int_t *LCP,
               }
               curr = m;
             #else
-              while(STACK[curr].idx>tmp[j]) curr++;
+              while(STACK[curr].idx>tmp[j] && curr < top) curr++;
 	    #endif
 
+              if(curr>=top) break;
               STACK[end].idx=STACK[curr].idx;
               STACK[end].lcp=STACK[curr].lcp;
               end++; 
+              curr++;
             }
           } 
 
