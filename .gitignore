@@ -8,3 +8,4 @@ lib/utils_32.h
 tests/
 test
 main
+.gitignore
