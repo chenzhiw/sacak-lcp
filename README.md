@@ -86,6 +86,22 @@ The peak memory 10,375 is exactly 10KB + 135 bytes.
 One can change to 64 bits integers adding -DM64=1 in the compilation.
 
 
+## Citation:
+
+Please, if you use this tool in an academic setting cite the following paper:
+
+    @article{LouzaGT17,
+     author    = {Felipe Alves da Louza and Simon Gog and Guilherme P. Telles},
+     title     = {Optimal suffix sorting and {LCP} array construction for constant alphabets},
+     journal   = {Inf. Process. Lett.},
+     volume    = {118},
+     pages     = {30--34},
+     year      = {2017},
+     url       = {http://dx.doi.org/10.1016/j.ipl.2016.09.010},
+     doi       = {10.1016/j.ipl.2016.09.010},
+    }
+    
+
 ## References
 
 \[1\] Louza, F. A., Gog, S., Telles, G. P., Optimal suffix sorting and LCP array construction for constant alphabets, Inf. Process. Lett. 118 (2017) 30-34, http://www.sciencedirect.com/science/article/pii/S0020019016301375
