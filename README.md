@@ -4,14 +4,16 @@ SACA-K+LCP is an optimal suffix and LCP array construction algorithm for constan
 
 ## Introduction
 
-SACA-K+LCP \[1\] extends the optimal suffix sorting algorithm SACA-K [2] to also compute the LCP array for a string in linear time using O(\sigma \log n) bits of additional space (workspace). In practice, SACA-K+LCP uses 10KB additional space for strings from ASCII alphabet.
+SACA-K+LCP \[1\] extends the optimal suffix sorting algorithm SACA-K [2] to also compute the LCP array for a string in linear time using O(\sigma \log n) bits of additional space (workspace). In practice, SACA-K+LCP uses 10KB of additional space for strings from ASCII alphabet.
 
 
 ## Build requirements
+
 An ANSI C Compiler (e.g. GNU GCC)
 
 
 ## API
+
 ```c
 /** @brief computes the suffix and LCP arrays of string s[0..n-1] in {0..255}^n
  *
@@ -76,17 +78,13 @@ malloc_count ### exiting, total: 19,832, peak: 10,375, current: 0
 
 **Remark:**
 
-```
 The peak memory 10,375 is exactly 10KB + 135 bytes.
 10KB is the workspace and 135 (9\*15 bytes) bytes is the space used by the string s and the arrays SA and LCP (9\*n bytes)
-```
 
 **Strings larger than n=2^20:**
 
-```t
 One can change to 64 bits integers adding -DM64=1 in the compilation.
-```
---
+
 
 ## References
 
