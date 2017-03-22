@@ -1,11 +1,10 @@
 # sacak-lcp
 
-SACA-K+LCP \[1\] is an optimal suffix and LCP array construction algorithm (SLACA) for strings from constant alphabets.
+SACA-K+LCP is an optimal suffix and LCP array construction algorithm for constant alphabets.
 
 ## Introduction
 
-SACA-K+LCP \[1\] extends the optimal suffix sorting algorithm SACA-K [2] to also compute the LCP array for a string in linear time using O(\sigma \log n) bits of additional space (workspace). For ASCII alphabets, SACA-K+LCP uses 10KB additional
-space.
+SACA-K+LCP \[1\] extends the optimal suffix sorting algorithm SACA-K [2] to also compute the LCP array for a string in linear time using O(\sigma \log n) bits of additional space (workspace). In practice, SACA-K+LCP uses 10KB additional space for strings from ASCII alphabet.
 
 
 ## Build requirements
@@ -35,9 +34,9 @@ int sacak_lcp(unsigned char *s, uint_t *SA, int_t* LCP, uint_t n);
 int sacak_lcp_int(int_t *s, uint_t *SA, int_t* LCP, uint_t n, uint_t k);
 ```
 
-## Example:
+## Example
 
-Compilation:
+**Compilation:**
 
 ```sh
 gcc -c sacak-lcp.c -o sacak-lcp.o
@@ -45,13 +44,13 @@ gcc -c experiments/external/malloc_count.c
 gcc test.c -o test sacak-lcp.o malloc_count.o -ldl
 ```
 
-Run a test:
+**Run a test:**
 
 ```c
 ./test banaananaanana
 ```
 
-Output:
+**Output:**
 
 ```c
 sizeof(int_t) = 4 bytes
@@ -75,15 +74,18 @@ i	SA	LCP	BWT	suffixes
 malloc_count ### exiting, total: 19,832, peak: 10,375, current: 0
 ```
 
-### Remark:
+**Remark:**
 
+```
 The peak memory 10,375 is exactly 10KB + 135 bytes.
 10KB is the workspace and 135 (9\*15 bytes) bytes is the space used by the string s and the arrays SA and LCP (9\*n bytes)
+```
 
-### Strings larger than 2^20:
+**Strings larger than n=2^20:**
 
+```t
 One can change to 64 bits integers adding -DM64=1 in the compilation.
-
+```
 --
 
 ## References
