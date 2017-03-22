@@ -86,7 +86,7 @@ The peak memory 10,375 is exactly 10KB + 135 bytes.
 One can change to 64 bits integers adding -DM64=1 in the compilation.
 
 
-## Citation:
+## Citation
 
 Please, if you use this tool in an academic setting cite the following paper:
 
