@@ -7,3 +7,4 @@ lib/utils_64.h
 lib/utils_32.h
 tests/
 test
+main
