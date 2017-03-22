@@ -1,5 +1,37 @@
 #include "sacak-lcp.h"
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <limits.h>
+#include <inttypes.h>
+#include <string.h>
+
+#define max(a,b) ((a) > (b) ? (a) : (b))
+
+#ifndef DEBUG
+        #define DEBUG 0 
+#endif
+
+#ifndef M64
+        #define M64 0
+#endif
+
+#if M64
+        typedef int64_t  int_t;
+        typedef uint64_t uint_t;
+        #define PRIdN    PRId64
+        #define U_MAX    UINT64_MAX
+        #define I_MAX    INT64_MAX
+        #define I_MIN    INT64_MIN
+#else
+        typedef int32_t  int_t;
+        typedef uint32_t uint_t;
+        #define PRIdN    PRId32
+        #define U_MAX    UINT32_MAX
+        #define I_MAX    INT32_MAX
+        #define I_MIN    INT32_MIN
+#endif
+
 // set only the highest bit as 1, i.e. 1000...
 //const unsigned int EMPTY_k=((unsigned int)1)<<(sizeof(unsigned int)*8-1); 
 const uint_t EMPTY_k=((uint_t)1)<<(sizeof(uint_t)*8-1); 
@@ -10,7 +42,6 @@ const uint_t EMPTY_k=((uint_t)1)<<(sizeof(uint_t)*8-1);
 #define true 1
 #define false 0
 
-#define DEBUG 0 
 #define DEPTH 0
 #define TIME  0
 #define RMQ   2  //variants = (1, trivial) (2, using Gog's stack)
@@ -1244,7 +1275,6 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
   #endif
 
 
-/***************************************************************/
   uint_t *RA=s1;
   int_t *PLCP=LCP+m-n1;//PHI is stored in PLCP array
 
@@ -1292,15 +1322,6 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
         printf("%" PRIdN "\t", LCP[i]);
   printf("\n\n");
   #endif
-
-/***************************************************************/
-
-  /**
-  if(!lcp_array_check((unsigned char*)s, SA1, n1, LCP, n))printf("isNotLCP (lms)!!\n"); 
-  else printf("isLCP (lms)!!\n");
-  **/
-
-/***************************************************************/
 
   #if TIME
     time_start(&t_time, &c_time);
@@ -1375,6 +1396,28 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
   #endif
 
 return depth;
+}
+
+/*****************************************************************************/
+
+int sacak(unsigned char *s, uint_t *SA, uint_t n){
+  if((s == NULL) || (SA == NULL) || (n < 0)) return -1;
+  return SACA_K((int_t*)s, (uint_t*)SA, n, 256, n, sizeof(char), 0);
+}
+
+int sacak_int(int_t *s, uint_t *SA, uint_t n, uint_t k){
+  if((s == NULL) || (SA == NULL) || (n < 0)) return -1;
+  return SACA_K((int_t*)s, (uint_t*)SA, n, k, n, sizeof(int_t), 0);
+}
+
+int sacak_lcp(unsigned char *s, uint_t *SA, int_t* LCP, uint_t n){
+  if((s == NULL) || (SA == NULL) || (LCP == NULL) || (n < 0)) return -1;
+  return SACA_K_LCP((int_t*)s, (uint_t*)SA, (int_t*)LCP, n, 256, n, sizeof(char), 0);
+}
+
+int sacak_lcp_int(int_t *s, uint_t *SA, int_t* LCP, uint_t n, uint_t k){
+  if((s == NULL) || (SA == NULL) || (LCP == NULL) || (n < 0)) return -1;
+  return SACA_K_LCP((int_t*)s, (uint_t*)SA, (int_t*)LCP, n, k, n, sizeof(int_t), 0);
 }
 
 /*****************************************************************************/

@@ -18,9 +18,11 @@
 #include "lib/lcp_array.h"
 #include "external/malloc_count/malloc_count.h"
 #include "external/sais-lcp.h"
-#include "src/sacak-lcp.h"
+#include "../sacak-lcp.h"
 
-#define DEBUG 0 
+#ifndef DEBUG
+	#define DEBUG 0 
+#endif
 
 /*******************************************************************/
 unsigned char* cat_char(unsigned char** R, int k, int_t *n){
@@ -117,7 +119,8 @@ int VALIDATE=0, MODE=0, OUTPUT=0;
 	switch(MODE){
 
 		case 1: printf("## SACA_K+LCP ##\n"); 
-			depth = SACA_K_LCP((int_t*)str, (uint_t*)SA, LCP, n, 256, n, sizeof(char), 0);
+			//depth = SACA_K_LCP((int_t*)str, (uint_t*)SA, LCP, n, 256, n, sizeof(char), 0);
+			depth = sacak_lcp(str, (uint_t*)SA, LCP, n); 
 			break;
 
 		case 2:	printf("## SAIS+LCP ##\n"); 
@@ -125,7 +128,7 @@ int VALIDATE=0, MODE=0, OUTPUT=0;
 			break;
 
 		case 3:	printf("## SACA_K and PHI ##\n"); 
-			depth = SACA_K((int_t*)str, (uint_t*)SA, n, 256, n, sizeof(char), 0);
+			depth = sacak(str, (uint_t*)SA, n);
 			//LCP-array
 			time_start(&t_start, &c_start);
 			lcp_PHI((unsigned char*)str, (uint_t*)SA, LCP, n);

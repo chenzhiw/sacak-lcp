@@ -1,28 +1,89 @@
-#sacak-lcp
+# sacak-lcp
 
-This code is an implementation of SACA-K+LCP [1], which extends the
-optimal suffix sorting algorithm SACA-K [2] to also compute the LCP array.
+sacak\_lcp is a suffix and LCP array construction algorithm (SLACA).
 
---
-##run:
+# Introduction
 
-To run a test type:
+sacak\_lcp is an implementation of SACA-K+LCP [1], which extends the optimal
+suffix sorting algorithm SACA-K [2] to also compute the LCP array for a string
+s[0,n-1] in {0..\sigma-1}^n in O(n)-time using O(\sigma \log n) bits of
+additional space (workspace). In practice, sacak\_lcp uses 10KB additional
+space.
 
-```sh
-make
-make run DIR=dataset INPUT=input.100.txt K=100 MODE=1
+
+## Build requirements
+An ANSI C Compiler (e.g. GNU GCC)
+
+
+## API
+```c
+/** @brief computes the suffix and LCP arrays of string s[0..n-1] in {0..255}^n
+ *
+ *  @param s    input string with s[n-1]=0
+ *  @param SA   suffix array 
+ *  @param LCP  LCP array 
+ *  @param n    string length
+ *  @return -1 if an error occured, otherwise the depth of the recursive calls.
+ */
+int sacak\_lcp(unsigned char *s, uint\_t *SA, int\_t* LCP, uint\_t n);
+
+/** @brief computes the suffix and LCP arrays of string s[0..n-1] in {0..k}^n
+ *
+ *  @param s    input string with s[n-1]=0
+ *  @param SA   suffix array 
+ *  @param LCP  LCP array 
+ *  @param n    string length
+ *  @return -1 if an error occured, otherwise the depth of the recursive calls.
+ */
+int sacak\_lcp\_int(int\_t *s, uint\_t *SA, int\_t* LCP, uint\_t n, uint\_t k);
 ```
 
-One can change to 32 bits integers (when n < 2^31) in lib/utils.h, setting m64 to 0.
-
 --
-**Settings:**
+##Example:
 
-MODE parameter specifies which algorithm is called by main.c:
+Compilation:
 
-* 1: SACA-K+LCP 
-* 2: SAIS+LCP [3]
-* 3: SACA-K [2] and \Phi-algorithm [4] 
+```sh
+gcc -c sacak-lcp.c -o sacak-lcp.o
+gcc -c experiments/external/malloc_count.c
+gcc test.c -o test sacak-lcp.o malloc_count.o -ldl
+```
+
+To run a test:
+
+```c
+./test banaananaanana
+```
+
+#output
+
+```c
+sizeof(int\_t) = 4 bytes
+Text = banaananaanana$
+i	SA	LCP	BWT	suffixes
+0	14	0	a	$
+1	13	0	n	a$
+2	8	1	n	aanana$
+3	3	6	n	aananaanana$
+4	11	1	n	ana$
+5	6	3	n	anaanana$
+6	1	8	b	anaananaanana$
+7	9	3	a	anana$
+8	4	5	a	ananaanana$
+9	0	0	$	banaananaanana$
+10	12	0	a	na$
+11	7	2	a	naanana$
+12	2	7	a	naananaanana$
+13	10	2	a	nana$
+14	5	4	a	nanaanana$
+malloc\_count ### exiting, total: 19,832, peak: 10,375, current: 0
+```
+
+Note that the peak memory 10,375 is exactly 10KB + 135 (which is n\*9 = 15\*9) bytes.
+Therefore, sacak\_lcp's workspace is exactly 10KB.
+--
+
+One can change to 64 bits integers adding -DM64=1 in the compilation.
 
 --
 
