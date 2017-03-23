@@ -46,6 +46,7 @@
         #define PRIdN    PRId32
         #define U_MAX    UINT32_MAX
         #define I_MAX    INT32_MAX
+        #define I_MIN    INT32_MIN
 #endif
 
 /** @brief computes the suffix array of string s[0..n-1] 

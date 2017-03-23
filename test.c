@@ -13,7 +13,6 @@ int main(int argc, char *argv[]){
 	// intput data
 	if(argc==2){
 		Text = malloc((strlen(argv[1])+1)*sizeof(unsigned char));
-		printf("%zu\n", strlen(argv[1]));
 		sscanf(argv[1], "%s", Text);	
 	}
 	else{

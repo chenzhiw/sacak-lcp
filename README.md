@@ -41,8 +41,7 @@ int sacak_lcp_int(int_t *s, uint_t *SA, int_t* LCP, uint_t n, uint_t k);
 **Compilation:**
 
 ```sh
-gcc -c sacak-lcp.c -o sacak-lcp.o
-gcc -c experiments/external/malloc_count.c
+gcc -c sacak-lcp.c experiments/external/malloc_count.c
 gcc test.c -o test sacak-lcp.o malloc_count.o -ldl
 ```
 
