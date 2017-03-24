@@ -7,15 +7,34 @@ const uint_t EMPTY_k=((uint_t)1)<<(sizeof(uint_t)*8-1);
 // get s[i] at a certain level
 #define chr(i) (cs==sizeof(int_t)?((int_t*)s)[i]:((unsigned char *)s)[i])
 
+
 #define true 1
 #define false 0
 
 #define DEPTH 0
-#define TIME  0
+#define TIME  1
 #define RMQ   2  //variants = (1, trivial) (2, using Gog's stack)
 #define BINARY 0 //binary search on stack operations
 
 #define STACK_SIZE 895 //to use 10Kb of working space
+
+/**/
+
+void t_start(time_t *t_time, clock_t *c_clock){
+
+	*t_time = time(NULL);
+	*c_clock =  clock();
+}
+
+double t_stop(time_t t_time, clock_t c_clock){
+
+	double aux1 = (clock() - c_clock) / (double)(CLOCKS_PER_SEC);
+	double aux2 = difftime (time(NULL),t_time);
+	printf("CLOCK = %lf TIME = %lf\n", aux1, aux2);
+	return aux1;
+}
+
+/**/
 
 typedef struct _pair{
   uint_t idx;
@@ -1057,14 +1076,14 @@ int_t SACA_K(int_t *s, uint_t *SA,
   if(level==0) {
 
     #if TIME
-      time_start(&t_time, &c_time);
+      t_start(&t_time, &c_time);
     #endif
 
     putSuffix0(SA, s, bkt, n, K, n1, cs);
 
     #if TIME
       printf("SA (mapped):\n");
-      time_stop(t_time, c_time);
+      t_stop(t_time, c_time);
     #endif
 
     #if DEBUG
@@ -1075,24 +1094,24 @@ int_t SACA_K(int_t *s, uint_t *SA,
     #endif
 
     #if TIME
-      time_start(&t_time, &c_time);
+      t_start(&t_time, &c_time);
     #endif
 
     induceSAl0(SA, s, bkt, n, K, true, cs);
 
     #if TIME
       printf("L-type:\n");
-      time_stop(t_time, c_time);
+      t_stop(t_time, c_time);
     #endif
 
     #if TIME
-      time_start(&t_time, &c_time);
+      t_start(&t_time, &c_time);
     #endif
     induceSAs0(SA, s, bkt, n, K, true, cs);
 
     #if TIME
       printf("S-type:\n");
-      time_stop(t_time, c_time);
+      t_stop(t_time, c_time);
     #endif
 
     free(bkt);
@@ -1105,7 +1124,7 @@ int_t SACA_K(int_t *s, uint_t *SA,
 
   #if DEPTH
   printf("depth %" PRIdN ":\nname_ctr = %" PRIdN ", n1 =%" PRIdN ", n = %" PRIdN "\n", depth, name_ctr, n1, n);
-  time_stop(t_start, c_start);
+  t_stop(t_start, c_start);
   #endif
 
 return depth;
@@ -1247,7 +1266,7 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
   int_t *PLCP=LCP+m-n1;//PHI is stored in PLCP array
 
   #if TIME
-    time_start(&t_time, &c_time);
+    t_start(&t_time, &c_time);
   #endif
 
   //compute the LCP of consecutive LMS-suffixes
@@ -1255,7 +1274,7 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
 
   #if TIME
   printf("PHI-algorithm (lms):\n");
-  time_stop(t_time, c_time);
+  t_stop(t_time, c_time);
   #endif
 
   #if DEBUG
@@ -1292,14 +1311,14 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
   #endif
 
   #if TIME
-    time_start(&t_time, &c_time);
+    t_start(&t_time, &c_time);
   #endif
 
   putSuffix0_LCP(SA, LCP, s, bkt, n, K, n1, cs);
 
   #if TIME
     printf("SA (mapped):\n");
-    time_stop(t_time, c_time);
+    t_stop(t_time, c_time);
   #endif
 
   #if DEBUG
@@ -1314,14 +1333,14 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
   #endif
 
   #if TIME
-    time_start(&t_time, &c_time);
+    t_start(&t_time, &c_time);
   #endif
 
   induceSAl0_LCP(SA, LCP, s, bkt, n, K, cs);
   
   #if TIME
     printf("L-type:\n");
-    time_stop(t_time, c_time);
+    t_stop(t_time, c_time);
   #endif
 
   #if DEBUG
@@ -1336,14 +1355,14 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
   #endif
 
   #if TIME
-    time_start(&t_time, &c_time);
+    t_start(&t_time, &c_time);
   #endif
 
   induceSAs0_LCP(SA, LCP, s, bkt, n, K, cs);
 
   #if TIME
     printf("S-type:\n");
-    time_stop(t_time, c_time);
+    t_stop(t_time, c_time);
   #endif
 
   #if DEBUG
@@ -1360,7 +1379,7 @@ int_t SACA_K_LCP(int_t *s, uint_t *SA, int_t *LCP,
 
   #if DEPTH
   printf("depth %" PRIdN ":\nname_ctr = %" PRIdN ", n1 =%" PRIdN ", n = %" PRIdN "\n", depth, name_ctr, n1, n);
-  time_stop(t_start, c_start);
+  t_stop(t_start, c_start);
   #endif
 
 return depth;
