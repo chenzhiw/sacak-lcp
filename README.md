@@ -31,6 +31,7 @@ int sacak_lcp(unsigned char *s, uint_t *SA, int_t* LCP, uint_t n);
  *  @param SA   suffix array 
  *  @param LCP  LCP array 
  *  @param n    string length
+ *  @param k    alphabet size
  *  @return -1 if an error occured, otherwise the depth of the recursive calls.
  */
 int sacak_lcp_int(int_t *s, uint_t *SA, int_t* LCP, uint_t n, uint_t k);
