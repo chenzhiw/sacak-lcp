@@ -37,7 +37,7 @@ clean:
 	\rm -f lib/*.o external/*.o main sacak-lcp.o
 
 compile: main.c ${LIBOBJ} 
-	$(CC) $(CFLAGS) $(LFLAGS) -o main main.c ${LIBOBJ}
+	$(CC) -o main main.c ${LIBOBJ} $(CFLAGS) $(LFLAGS) 
 
 run:
 	./main $(DIR) $(INPUT) $(K) $(MODE) $(CHECK) $(OUTPUT)
